@@ -3,13 +3,13 @@
 (Without DB)
 
 Open CMD and change directory:
-Cd desktop
+cd desktop
 
 Clone repository:
-git clone https://github.com/Subhashini13/Invoice_demo.git
+git clone https://github.com/Subhashini13/bmbc_invoice.git
 
 Change pwd to project parent directory:
-cd invoice_demo
+cd bmbc_invoice
 
 Create a python virtual environment:
 python -m venv invoice_env
