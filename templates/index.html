@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Invoice Demo</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',
+    filename="css/style.css")}}">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="invoice_wrapper">
+        <div class="header">
+          <div class="logo_invoice_wrap">
+            <div class="logo_sec">
+              <img
+                src="{{url_for('static', filename='images/favicon.png')}}"
+                alt="code logo"
+              />
+              <div class="title_wrap">
+                <p class="title bold">Book my Best Class</p>
+                <p class="sub_title"></p>
+              </div>
+            </div>
+            <div class="invoice_sec">
+              <p class="invoice bold">INVOICE</p>
+              <p class="invoice_no">
+                <span class="bold">Invoice</span>
+                <span>#{{context['invoice_number']}}</span>
+              </p>
+              <p class="date">
+                <span class="bold">Date</span>
+                <span>{{context['date']}}</span>
+              </p>
+            </div>
+          </div>
+          <div class="bill_total_wrap">
+            <div class="bill_sec">
+              <p>Bill To</p>
+              <p class="bold name">{{context['customer'].title()}}</p>
+              <span>
+                {{context['address'].title()}}<br />
+                {{context['contact']}}
+              </span>
+            </div>
+            <!-- <div class="total_wrap">
+              <p>Total Due</p>
+              <p class="bold price">
+                : INR.{{context['total_due']|round(2, 'floor')}}
+              </p>
+            </div> -->
+          </div>
+        </div>
+        <div class="body">
+          <div class="main_table">
+            <div class="table_header">
+              <div class="row">
+                <div class="col col_no">NO.</div>
+                <div class="col col_des">ITEM DESCRIPTION</div>
+                <div class="col col_price">PRICE</div>
+                <div class="col col_qty">QTY</div>
+                <div class="col col_total">TOTAL</div>
+              </div>
+            </div>
+            <div class="table_body">
+              {% for item in context['ordered_items'] %}
+              <div class="row">
+                <div class="col col_no">
+                  <p>{{'%02d' % loop.index}}</p>
+                </div>
+                <div class="col col_des">
+                  <p class="bold">{{item['name'].title()}}</p>
+                  <p>{{item['description']}}</p>
+                </div>
+                <div class="col col_price">
+                  <p>INR {{item['price']|round(2, 'floor')}}</p>
+                </div>
+                <div class="col col_qty">
+                  <p>{{item['quantity']}}</p>
+                </div>
+                <div class="col col_total">
+                  <p>INR {{item['total_price']|round(2, 'floor')}}</p>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="paymethod_grandtotal_wrap">
+            <div class="paymethod_sec">
+              <p class="bold">Payment Method</p>
+              <p>Cash, Visa, master Card and  Cheque</p>
+            </div>
+            <div class="grandtotal_sec">
+              <p class="bold">
+                <span>SUB TOTAL AMOUNT</span>
+                <span>INR {{context['sub_total']|round(2, 'floor')}}</span>
+              </p>
+              <p>
+                <span>Tax Vat </span>
+                <span>INR {{context['tax']|round(2, 'floor')}}</span>
+              </p>
+              <p>
+                <span>Discount 10%</span>
+                <span>INR {{context['discount']|round(2, 'floor')}}</span>
+              </p>
+              <p class="bold">
+                <span>Grand Total AMOUNT</span>
+                <span>INR {{context['grand_total']|round(2, 'floor')}}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <p>Thank you for Choosing Us and Best Wishes</p>
+          <div class="terms">
+            <p class="tc bold">Terms & Coditions</p>
+            <p>
+              Contact Info:
+              BMBC, Forum, DLF Cyber City Rd,DLF Phase 3, Gurugram, Haryana 122002
+              info@bookmybestclass.com
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
